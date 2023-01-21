@@ -1,16 +1,21 @@
-export const App = () => {
+import { ContactsPage } from 'features/contacts/Contacts';
+import ContactForm from './ContactForm/ContactForm';
+import { Section } from './Section/Section';
+import { Layout } from './Layout/Layout';
+import { ToastContainer } from 'react-toastify';
+
+function App() {
   return (
-    <div
-      style={{
-        height: '100vh',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        fontSize: 40,
-        color: '#010101'
-      }}
-    >
-      React homework template
-    </div>
+    <Layout>
+      <Section title="Phonebook">
+        <ContactForm />
+      </Section>
+      <Section title="Contacts">
+        <ContactsPage />
+      </Section>
+      <ToastContainer autoClose={3000} />
+    </Layout>
   );
-};
+}
+
+export default App;
