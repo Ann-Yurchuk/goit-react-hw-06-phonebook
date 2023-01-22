@@ -7,7 +7,7 @@ const initialState = {
     { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
     { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
   ],
-  query: '',
+  filter: '',
 };
 
 const contactsSlice = createSlice({
@@ -22,12 +22,12 @@ const contactsSlice = createSlice({
         contact => contact.id !== action.payload
       );
     },
-    setQuery: (state, action) => {
-      state.query = action.payload;
+    setFilter: (state, action) => {
+      state.filter = action.payload;
     },
   },
 });
 
-export const { addContact, deleteContact, setQuery } = contactsSlice.actions;
+export const { addContact, deleteContact, setFilter } = contactsSlice.actions;
 
 export default contactsSlice.reducer;

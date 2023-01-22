@@ -3,25 +3,23 @@ import { deleteContact } from '../../redux/contacts.slice';
 
 export const ContactList = () => {
   const dispatch = useDispatch();
-  const { contacts } = useSelector(state => state.contacts);
-  const filter = useSelector(state => state.filter);
+  const { contacts, filter } = useSelector(state => state.contacts);
 
   const onDeleteContact = id => {
     dispatch(deleteContact(id));
   };
 
-  function filterContact() {
-    if (filter.length > 0) {
-      return contacts.filter(contact =>
-        contact.name.toLowerCase().includes(filter.toLowerCase().trim())
-      );
-    }
-    return contacts;
-  }
+  const filteredContacts = (contacts, filter) => {
+    return contacts.filter(contact =>
+      contact.name.toLowerCase().includes(filter.toLowerCase())
+    );
+  };
+
+  const filterContacts = filteredContacts(contacts, filter);
 
   return (
-    <ul contacts={filterContact()}>
-      {contacts.map(contact => (
+    <ul>
+      {filterContacts.map(contact => (
         <li key={contact.id}>
           <div>
             <p> {contact.name}</p>

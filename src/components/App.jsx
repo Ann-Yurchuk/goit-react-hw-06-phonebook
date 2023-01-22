@@ -1,5 +1,5 @@
 import { ContactsPage } from 'features/contacts/Contacts';
-import ContactForm from './ContactForm/ContactForm';
+import { ContactForm } from './ContactForm/ContactForm';
 import { Section } from './Section/Section';
 import { Layout } from './Layout/Layout';
 import { ToastContainer } from 'react-toastify';

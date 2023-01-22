@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { nanoid } from 'nanoid';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { InputPhone, Button } from './Contacts.styled';
 import { addContact } from '../../redux/contacts.slice';
 import { toast } from 'react-toastify';
@@ -10,20 +10,29 @@ export const CreateContact = () => {
   const dispatch = useDispatch();
   const [newUserName, setNewUserName] = useState('');
   const [number, setNumber] = useState('');
+  const { contacts } = useSelector(state => state.contacts);
 
   const onAddNewContact = () => {
-    if (!newUserName || !number) {
-      return toast('Please fill in all fields');
-    }
-
     const newContact = {
       id: nanoid(),
       name: newUserName,
       number: number,
     };
     dispatch(addContact(newContact));
+
     setNewUserName('');
     setNumber('');
+
+    if (!newUserName || !number) {
+      return toast('Please fill in all fields');
+    }
+    const isAdded = name =>
+      contacts.map(contact => contact.name).includes(name);
+
+    if (isAdded(newUserName)) {
+      alert(`${newUserName} is already in contacts`);
+      return;
+    }
   };
 
   return (
