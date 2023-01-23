@@ -13,26 +13,23 @@ export const CreateContact = () => {
   const { contacts } = useSelector(state => state.contacts);
 
   const onAddNewContact = () => {
+    if (!newUserName || !number) {
+      return toast('Please fill in all fields');
+    }
+    if (contacts.find(elem => elem.name === newUserName)) {
+      alert(`${newUserName} is already in contacts`);
+      setNewUserName('');
+      setNumber('');
+      return;
+    }
     const newContact = {
       id: nanoid(),
       name: newUserName,
       number: number,
     };
     dispatch(addContact(newContact));
-
     setNewUserName('');
     setNumber('');
-
-    if (!newUserName || !number) {
-      return toast('Please fill in all fields');
-    }
-    const isAdded = name =>
-      contacts.map(contact => contact.name).includes(name);
-
-    if (isAdded(newUserName)) {
-      alert(`${newUserName} is already in contacts`);
-      return;
-    }
   };
 
   return (

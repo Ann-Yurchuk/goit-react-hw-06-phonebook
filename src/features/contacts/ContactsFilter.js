@@ -1,13 +1,13 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { InputPhone } from './Contacts.styled';
-import { setFilter } from 'redux/contacts.slice';
+import { setFilter } from 'redux/filter.slice';
 
 export const ContactsFilter = () => {
   const dispatch = useDispatch();
-  const filter = useSelector(state => state.contacts.filter);
+  const { filter } = useSelector(state => state.filter.filter);
 
-  const onQueryChange = query => {
-    dispatch(setFilter(query.toLowerCase()));
+  const onQueryChange = e => {
+    dispatch(setFilter(e.currentTarget.value));
   };
 
   return (
@@ -16,8 +16,7 @@ export const ContactsFilter = () => {
         placeholder="Find contacts by name"
         type="text"
         value={filter}
-        id="filter"
-        onChange={e => onQueryChange(e.target.value)}
+        onChange={onQueryChange}
       />
     </>
   );
