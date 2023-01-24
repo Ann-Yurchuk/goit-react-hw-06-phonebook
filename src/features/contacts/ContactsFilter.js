@@ -4,7 +4,7 @@ import { setFilter } from 'redux/filter.slice';
 
 export const ContactsFilter = () => {
   const dispatch = useDispatch();
-  const { filter } = useSelector(state => state.filter.filter);
+  const filter = useSelector(state => state.filter);
 
   const onQueryChange = e => {
     dispatch(setFilter(e.currentTarget.value));
