@@ -16,6 +16,7 @@ import filterReducer from 'redux/filter.slice';
 const persistConfig = {
   key: 'root',
   storage,
+  blacklist: ['filter'],
 };
 
 const rootReducer = combineReducers({
